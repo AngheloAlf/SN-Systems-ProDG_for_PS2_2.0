@@ -1,0 +1,457 @@
+
+Version
+1.01        First version released on closed beta November 1999
+1.02        Floating point in register windows
+1.03        VU0 register window
+1.04        VU1 register window and 32/64/128 bit R5900 main register window
+1.05        Assorted extensions to watch/locals window browser
+1.06        auto-adjust scroll bars for all windows, including register pane (now fixed size map)
+            go with this as first open beta candidate 13-Dec 99
+1.07        fixed some minor problems. This went open beta 13-Dec-99
+1.08        First version to use Martins new COMMS2.CPP and PS2 Control
+
+1.09        17-12-99
+            fixed faulty .xyzw masks on VU macro instructions
+            Register window - a3 register was displaying a2 instead. Now fixed.
+            /t switch added to allow user to specify target PS2 name on command line or request pick list
+            re-did SelectTarget() to allow you to switch to another target whilst debugging.
+
+
+1.10        20-12-99
+            Now spawns PS2Control if it's not already running
+            Register window start posn now reset on 32/64/128 width switch
+            Watches no longer crash if no symbols loaded
+
+1.11        07-01-00
+            Fixed strange ELF STABS C++ loading problems (Martin)
+            Vastly speeded up symbol loading (Martin)
+            command line would terminate after -tmachname switch used - now fixed
+            Full command line argc, argv[] support to PS2 main() (note cmdline ordering changed)
+            Full pathname support for source files before resorting to source search path
+            Bitfield members now evaluate correctly (Martin)
+also present with this update:-
+            PS2run command line to PS2 app is now fixed
+            PS2run /p switch causes it to display stdout stream (no ELF necessary)
+            PS2control now notices if remote DSNETM is shut down
+            PS2control can now reset a target even if it has not seen it before.
+
+1.12        10-01-00
+            member vars in base classes now display correctly in watch windows
+            oops. Bug in Current dir + Filename concatenation fixed (was breaking absolute paths in ELF)
+
+1.13        11-01-00
+            Bitfields in longs fixed (Martin)
+            Martin fixed obscure ELF symbol loading problem (sometimes occurs with classes in structures)
+
+1.14        11-01-00
+            by default the debugger now leaves the target connection in same state it found it.
+            command line switches /nd and /da like in PS2run (no disconnect, disconnect always)
+            reset and restart now reloads source files in case they changed.
+            target memory is now cached, this should speed up many window operations
+            "Load New Source File" added to FILE menu and to Source pane context menu
+            Run, Step, Stepover etc disabled whilst target CPU is running
+            Elf Load Flags now saved to config on exit
+            space now allowed after /t switch
+            bug writing odd bytes of VU memory or reading more than 0x3E0 bytes fixed
+            Enabled Martin's memory fetch caching
+
+1.15        19-01-00
+            Work in progress but extra interim release because FS root reset on connect was upsetting Dean.
+            Load Elf Dialog now defaults to current directory
+            Loading an ELF via that menu no longer changes the curent dir (was causing config to save to wrong place)
+            ENUM typedefs are no longer shown as expandable in watch windows
+            debugger no longer resets FS root on initial connection
+            save binary option on file menu enabled
+            fixed some strange watch/locals window problems
+
+1.16        24-01-00
+            Another interim release - lets check the name unmangling on real people.
+            Has Martins name unmangling in it (requires DEMANGLE.DLL in same dir as debugger exe)
+            And Martins name completion (Rough version. Next will be like the new prototype.)
+            Load binary file enabled
+            Load/save Elf/Binary now remembers path, filename, address expressions in config file
+            VU Disassembly window
+
+1.17        26-01-00
+            More error checking added to binsave, binload, dis2file (reported on status line)
+            User selected fonts both as global default for new windows (on main settings menu)
+                and on a per-window basis (on right click context menu for a window)
+            Martin has implemented his code tracing algorith to improve source level step speed
+            Fixed - repeat rate too high was causing repeat keystrokes to delay WM_PAINTS.
+            Opcode display in disasm window is now optional (see right-click context menu)
+            Window charmap now dynamically resizes - so windows can be huge and fonts small
+            Expiry date extended.
+
+1.18        3-2-00
+            debugger remembers minimised/maximised state of windows too
+            if no DBUGPS2.PS2 config file in currentdir the debugger looks where the debugger .EXE was loaded from
+            Reset & Reload now reloads all source files in case they changed
+            PS2TM called in preference to obsolete PS2Control
+            Anonymous unions now supported
+            Expiry date extended
+
+1.18a   4-2-00
+            fix - expression eval - Some pointers showing up as pointing at nothing
+            Workaround - openfiledialog spec has changed for Win2k. Caused a bug in "LoadElfFile".
+            TTY pane work in progress present but not called yet - should make 1.19 next week
+
+1.18b   10-2-2000
+            Missing locals: made local pane reset to top of list if scope changes
+            Startup is faster: Symbols continue to load whilst target is resetting.
+            listboxes in dialogs now accept double clicks.
+            TTY window rewritten
+                Seperate TTY buffers maintained to EE, IOP, ALL etc (see right-click menu on TTY pane)
+                TTY streams now have large scrollback buffers
+                TTY pane wraps in window width
+            Missing TTY text: <cr> now ignored (used to do cr without lf) so text overwrites no longer happen
+            Reg pane - cursor now still positions correctly if window is scrolled
+            Disasm output tabs no longer upset by spaces in C++ names
+
+1.18c   10-2-2000   Necessary interim (internal) release
+            debugger remembers if it was maximized last time and starts up in same state
+            New TTY pane - for beta test
+
+1.19        17-2-2000
+            Martins new c++ browser. Also available for inserting watches, goto etc
+                ctrl-B brings up var browser in watch windows
+                and brings up function browser in disasm & source windows
+                see also 'Browse' added to right-click context menus.
+            New callstack pane. Allows context for whole debugger to be changed (dblclk or <return>)
+            Doubleclicks accepted in some panes (disasm, source, watch, locals, callstack)
+            Mousewheel support (something odd happening with intellipoint installed - Hmmm :-/ )
+            (in progress) C++ symbol memory requirements reduced signifigantly
+            Variable lookup now hashed to increase speed of large watch windows
+            Fixed - top line of TTY window was sometimes displaying incorrectly
+            Fixed - position problem with scrolled register windows
+            Source pane cursor now tracks properly
+            Symbol loads are now much faster and memory requirements much lower
+             (but -s switch added in case anyone needs to do it the slow way. See DBUGPS2.TXT)
+            Fixed - you could not delete the watch immediately after an expanded watch
+
+1.19c   22-2-2000
+            Symbol table now even more compact in memory
+            fixed - some global symbols missing from name completion (but present in browser)
+            fixed - some obscure problems with C++ templates which arrived in initial version 1.19
+            anonymous unions now handled OK
+            time limit extended
+            Hardware breaks! C level (alt-B) and assembly level (alt-A)
+
+1.20        
+            user can now specify "bytes per line" for memory window display
+            and the ASCII display is now optional
+            time limit extended
+
+1.21        Memory display can now be float or fixed types as well as hex integers
+            Includes Martins new C expression handling and register references
+            So C++ references and values in registers should now work correctly.
+    a       Fixed problem in code for "Run to address" context menu item (DIS and SRC windows)
+
+1.22     Added support for .* and ->* C++ operators
+            DevStudio keymap
+            ctrl-E in source window switches to edit window in Dev Studio
+            fixed - bug causing VU reg window to display incorrectly
+            workaround - Error of first load of ELF file after "Reset"
+
+            modified the ctrl-E thing to use the pathopen matched filename, not the original build location
+            removed target_running checks from get and set memory
+            use the PS2Loader.cpp Martin sent from France to fix the modifying vars through pointers problem.
+
+1.22d   workaround bug in Win2K BeginPaint causing missing repaints of app windows
+            fixed problem in register expression evaluation
+            fixed 128 bit decimal number printer
+
+1.23    Last beta version
+        added command line parameters and other check boxes to Load Elf dialog
+1.23a   fixed ASM mode hardware break and added ">32MB" preset button
+
+        fixed memory pane overwrite when bytes-per-line is set
+        breakpoints now discarded if target reset in PS2TM
+
+1.30    Uses SN licensing
+        Fixed potentially crash bug whilst stepping from one source file into another
+        Fixed static vars - they used to display incorrectly in their home scope
+        SCEC request - breakpoints scrapped if target reset
+        Shift-F9 (from any window) adds a watch to topmost watch window and resets focus
+
+1.31    Added "change view" support (needed for split-pane stuff)
+        adjusted breakpoint mod so it only happens if target reset outside of debugger
+         (ie. not if reset response triggered by Reset&Reload)
+        also changed debugger to remove breakpoints on closing.
+
+1.33    Fixed - Logical NOT (!) operator was broken
+        Fixed - started from command line, left the breakpoint at main(). Fixed in AsyncReset.
+        Added StepOut to toolbar and keys (SN = shift-F8, DS=shift-F11)
+
+1.34    Split-Pane stuff hooked in by Steve - some minor niggles to work out
+        Martin fixed enums in watch windows.
+        char* and char [] now display strings in watch window as well as address
+        ctrl-E crash if MS Dev Studio not running
+        fixed - toggle breakpoint in dis window on long labels sometimes miscalcs address
+        display of watches in hex/decimal
+        Debugger no longer allows multiple instances of itself (unless you give it -m switch on cmd line)
+        Callstack now displays references as parameters correctly
+        fixed - TTY pane expanding tabs beyond right edge of window caused debugger to hang.
+        support for namespaces added by Martin
+        more sensible default sizing for new windows
+1.35    fixed some register map quirks with newly created register panes.
+
+        Doh, look, IOP has 8MB memory, not 2MB. So I have enabled the extra 6MB.
+        fixed - Disassembly of sqrt instruction was using wrong rs/rt for PS2
+        "Goto PC" enabled in memory window again.
+        added special breakpoint "break 1" is restartable from debugger
+        hard breaks are now disabled whilst stepping so you can step past a triggered HBP
+        halt at hard break can now be restarted without disabling hbp first
+        added "track PC" setting option to DISASM & SOURCE panes so even if a window is not current
+         it can still track the PC location.
+        breakpoints now persist via debugger config file by source line if possible or by address
+        /b switch added to disable breakpoint persistence across sessions
+        fixed - keymap saving in config was incorrect after first config reload
+        includes Martin's new multi-unit symbol and expression handling to allow IOP symbol support
+        control characters in watched strings no longer disturb watch window layout
+1.36    25-05-00 (internal version released to support)
+        added auto-update toggle button on toolbar
+        added new value, increment, decrement (return, keypad+, keypad- respectively) to memory window
+        4x byte writes to memory are now written as words so hardware can be set in memory window (needs latest PS2TM)
+        added -vs switch to enable Visual Studio features like automatic breakpoint import/export
+        added "import VS breaks" to Load Elf dialog
+        updated DBUGPS2 calling shell to include new command line switches in help message
+        fixed - was not finding default config file in debugger .exe directory
+        fixed - -vs switch was being overridden by previous config file so not appearing checked in LoadELF dialog
+        fixed - loading a source file to a source window was changing current directory
+        fixed - Reset & Reload did not complete if target main cpu was already running app.
+        Load Config from menu no longer attempts to persist breaks.
+1.37    IOP execution control appears to be working.
+        Much faster IOP module scanning.
+        Added "Default Radix Hex" checkbox to address dialog. No more leading "0x". Hurrah! Should have done this ages ago.
+a       IOP module start-up debug support added and Load IRX on menu.
+        GetPC now fails correctly if target is running.
+        minor updates to symbol handling to use above to fail PC context in expression when target running
+        ps2Loader now able to handle non contiguous section data
+        expression handling fix for Dean's "missing/misplaced ')' in type cast error"
+        IOP stored-state refreshed when target reset or ELF loaded.
+        Alt-W keypress toggles memory display word size between 8/16/32 bits
+        fixed incorrect 128 bit register display when EE regs are not available
+b       still has display problem if multiple breakpoint windows are open
+        ctrl-home and ctrl-end supported in source pane
+c       debugger can now distinguish multiple loaded copies of same IRX
+        "File/Load IRX" now loads symbols from that file rather than from first matching module on path.
+        now remembers last IRX path
+        fixed - current dir ';' on front of path was being skipped if another path followed
+d       IOP Callstack pane fixed
+        Assorted new pane tweaks and fixes by Steve
+        -f to reset fileserver root with elf download from command line (reflected in File/LoadElf checkbox)
+E       open beta release.
+        fixed - Load Elf would occasionally fail if target already running.
+        IRX files no longer kept open whilst debugging with their symbols.
+        Steve's mod to top a CPU's panes if it hits an exception. But with targetupdate after pane topped.
+        Martin's workaround for GNU linker bug with IOP data sections (prob does not occur if linking with -G0)
+         (if sbss or sdata were present the debugger gets global data addresses wrong)
+F       We no longer stop the IOP before a reset so avoiding unnecessary topping of IOP pane
+        PC tracking in disasm and source panes now only happens when target stops.
+G       False UnitStatus of VU0 and VU1 no longer disables register updates
+        fixed - I forgot to enable the IOP option on locals and watch pane context menus
+        IOP breakpoint import/export from Dev Studio now enabled
+H       reordered controls in hardware break dialogs so tab works properly
+        No need to rescan IRXs/IOPs on EE reset. Now restricted to just IOP.
+        Run to cursor (F6) suppressed in VU panes
+        Small windows memory leak on loading an ELF fixed
+        About updated to look a bit more professional
+        Target Manager stream 0 now used for debug info from TM so moved to DBG TTY (it was in EE TTY)
+        Has Steve's updated breakpoint and callstack panes
+I       A few other minor tweaks but nothing serious
+1.38    As 1.37i (beta) but release version built for 1.1 ProDG
+        Target manager diagnostic stream removed from ALL TTY buffer. Now only in DBG.
+a       Now OK on Dual-boot systems with multiple network cards.
+        Has Steve's new path browser for setting IRX and source search paths
+        Has Martin's initial VU overlay and symbol support
+        Now has Colour charmap support so Steve can add colour to text mapped panes
+        Fixed a fault setting breakpoints in disasm pane on lines with long label names
+        long128 and u_long128 now display correctly (but the GNU compiler still gets -ve assigns wrong)
+b       restored return key in watch window so it prompts for new value for var
+        goto address now works if target is not stopped (broken when new IOP support added)
+        Has Martin's VU single stepping and breakpointing
+        Fixed - multiple symbol table & scope mods were causing globals to not eval if target running
+c       Updated disassembly PC tracking to keep some previous code visible for context
+        fixed - problems if IOP expression evaluated after IRX path change
+        fixed - IOP step-over on a breakpoint line did not complete correctly
+d       included primitive breakpoint logging for Matt (but disabled for release)
+        fixed - /f switch was not working if debugger started from command line with short ELF filename
+E       fixed - breakpoints disappearing from source pane if symbols are reloaded
+        fixed - bad cursor display in memory windows if displaying as floats (how come no-one spotted this?)
+        -0 now distinguished from +0 in PS2 floating point "calculator" displays (memory, registers)
+F       fixed - minor cursor-on-PC positioning problem in disassembly windows if long labels on screen.
+        Modded so reset is *first* command to target. So we can connect to and reset a deadlocked PS2.
+        sanity check on memory window widths to cope with wacky config files.
+        fixed the "reset and reload" bugs I added when I did the above reset mod.
+        Fixed block nesting of local variables.
+        Fixed name search order when in a member function so it now does locals, members, globals.
+G       Fixed identify() crash problem reloading same elf as before via Load Elf menu item
+        Remembers path of last source file load
+        "Discard old breakpoints" option on Load Elf dialog
+        fixed bug in debug text pane colour support with "bright" colours
+        ANSI fg colour support in TTY (ESC 30 to 37 = {BLACK, RED, GREEN, DKYELLOW, BLUE, MAGENTA, CYAN, LTGREY} )
+        ANSI bg colour support in TTY (ESC 40 to 47 = {BLACK, RED, GREEN, DKYELLOW, BLUE, MAGENTA, CYAN, WHITE/BKGND} )
+        Coloured TTY streams differently in "ALL" TTY view. EE=BLACK, IOP=BLUE.
+        Included Martins references bugfix for built-in types
+        Breakpoint stuff restructured to make VU step/break support simpler
+        Note: special break op $4d (= "BREAK 1") is restartable using run/F9 - add to docs.
+        Hardware breaks now behave properly whilst single stepping (had to fix this for DMA breakpointing to work)
+H, I        Internal versions. VU feature intermediates.
+J       Intermediate. DMA pane disabled.
+K       New DMA pane prototype.
+1.39    First beta release of prototype DMA pane. Defaults to auto (tracking any hard breaks) mode.
+        Alt-D to access DMA HARD BREAKPOINT menu. Note breakpoint triggers before DMA starts.
+a       fixed - splitting a DMA pane used to cause a crash.
+b       fixed - very long labels in disassembly overflowed disasm text buffer. Now range checked.
+
+c       put some key shortcut hints onto menus
+        temporary problem: EE Single-Step is slow if you have a VU1 window
+        (VU1 analyse is slowing up single stepping on EE so as a temporary workaround I have
+        only enabled VU1 features if there is a VU1 window open in the debugger.)
+d       Fixed - Single stepping at source level on a hard break leaves the target running
+e       Fixed - Menu swapping from SNKeys to DSKeys
+f       DMA source/dest chain disassembly can now be set to arbitrary memory address
+        Fixed - "Global symbol not found" error on some PS2LINK stripped ELF files
+g       Steve has fixed a nasty split pane bug
+        refresh all forces DMA lists to be re-generated
+h       DMA lists forced to refresh on reset and DMA hard breaks
+i       Internal Version Martn made whilst Andy was away
+j       Version Andy built to double check something
+k       For Dean. With bugfix - now gives error message for illegal registers in symbol file
+m       Put Browse back on Alt-B as well as ctrl-shift-B
+        Fixed crash problem when loading ELF code without resetting target first
+        Fixed - cursor could go off end of mem line when bytes-per-line set
+        Fixed - despite menu text, <return> did not allow you to modify a var in locals pane
+        Fixed - Breakpoints in Visual Studio were being deleted on exiting debugger
+        Can no longer create a VU locals or callstack or TTY pane
+        Fixed - new watch pane always had scroll bars
+1.40    Release candidate for "ProDG major version 1.2"
+        Goto Address now displays errors in status bar
+        Added VU disasm to DMA pane
+            and allowed context and keypad +/- to set display mode
+            and allowed D bit breakpoint toggle (F5/F9 SN/VS and context menu)
+1.41    ps2dbg -r (no other params) no longer breaks debugger startup
+        added label support to right side of DMA disassembly
+        ref DMA packet now supported in TTE mode
+        VIF packets in tag now work OK even if the DMA packet was a ref
+        detects and warns about use of unused bits on DMA packets
+        detects illegal VIF packet sizes and alignments
+        Destination Chain mode now supported
+        Hard Breaks are no longer disabled by step/step-over the halted instruction
+        Added disable button to DMA Hard Break dialog
+        flags illegal call/ret in DMA channels > 2
+        Dylans VFxx registers as C variables now recognised by debugger
+        Expression syntax now accepts things like "$VF00", "$VF00x", "$VF05w" etc on EE MAIN CPU
+        Watch pane now responds to <CR> (to modify value) in DS/VS keymap mode
+        Fixed - occasional rogue VU disassembly line at start of VIF disasm.
+b       Fixed - spaces not accepted in VSI "LoadNewElf" commands
+        Debugger supports new runtime relocatable overlays on EE
+c       Fixed - breakpoints did not show on top line of source display
+        Fixed - corruption past end of register display if switched from scrolled VU pane to EE pane
+d       auto-update button now correctly reflects uto-update status
+        auto-update now correctly restores from config file
+        first prototype of working profile target code + debugger pane - looks good
+        fixed cursor position in byte mode if bpl set to value narrower than window
+D       removed filename case conversion on ELF file load.
+        fixed text appearing off end of fixed charmaps when stretched past window length (reg pane)
+P       has handler for US_UNIT_STATUS_CHANGED message from target manager
+        fixed - recent VU regs visibility on EE was causing IOP local vars to be evaluated incorrectly
+        Blacklist added
+e       fixed - occasional rogue double-click problem
+        IOP source panes updated more often eg. if IOP reset and source files change.
+        Name completion - now searches all active symbol tables for names
+        Expression & address evaluation - will now try all active symbol tables to evaluate expression
+        Added the ability to search for an incomplete structure reference in the scope of the constructor of the class it's defined in
+
+        Includes prototype Profiler pane
+        Fixed - mtsab/mtsah instruction disassembly error
+        sa register now visible in register panes
+1.42    Includes full DMA chain parser/checker on ctrl+E with ctrl+N to go to next error
+        If target stops at "break 1" debugger checks the PC points at that break before advancing it
+        Martin fixed a minor bug in VU disassembly of ops with 12 bit immediate operands
+        Fixed some recently introduced VU0 macro mode disassembly problems with vsqrt etc.
+        daddu $n,$n,$0  now diassembles as "dmove", not "move"
+        dword shift32s (eg. dsll32, dsra32 etc) now disassemble as regular shifts with 32+n count
+1.42.05 GIF packet disassembly completed and DMA pane re-ordered to fit it.
+
+        enabled DMA pane to show GS packets in VU1 RAM as well as DMA chains
+        now unlocks profiler function list if target reset
+        fixed minor problem with Profile pane if Accumulate turned off whilst pane is scrolled.
+        added "floating tooltip style expression eval on mouse hover" to source pane
+1.42.06 added -c switch to preserve case of filenames (for anyone using Samba with case sensitivity turned on)
+        DMA disasm now allows GS IMAGE to be broken across DMA packets (to supply data with REF)
+        DMA disasm now allows VIF UNPACK to be broken across DMA packets (but still flags it as a SIZE error)
+        includes Martins fix for a minor VU stall detection problem
+        added optional line numbers to source pane
+        fixed minor but annoying window state-save problem
+        starting a second debugger now correctly tops the previous one
+1.42.07 added text search to source pane (search=ctrl-F, search again = F3)
+        added "save TTY buffer to file" on TTY context menu
+1.42.08 debugger now breaks up scratchpad transfers to avoid >1K DMA which crashes PS2 DECI
+1.42.09 C++ names now show in profile pane
+        No longer sanity check dmatag addr field if ID is cnt or ret or end
+1.42.10 mpg broken across DMA packets now disassembles as DMA correctly
+        (note this version lost the TTE data in refs with QWC=0)
+1.42.11 experimental profile version to deal with SIF problems. Changes did not help. New ideas to try though.
+1.42.12 DMA refs with QWC=0 now disassemble TTE data properly
+        Scratchpad adress of $80000000 (as used by EZCUBE3) now fixed up correctly in DMA disasm.
+1.42.13 (S.Wright) I-register display format right-mouse selectable to hex or float. Register overwrite added for 
+        when display in float mode - input via dialog box.
+1.42.14 ADB. New Profiler (SNProfil.IRX) mechanism supported. Needs the new LIBSN to work.
+        fixed hex overtype of registers which broke in 1.42.13
+
+1.43.05 ADB - mem bytes per line setting was not allowing the value 4 (still needs more sanity checks)
+        changed offset(vixx) VU disasm to show ofset in hex rather than decimal
+        DMA disasm now allows GIFTAG & reglist data to be supplied by a seperate REF
+        Comms had PS2 scratchpad treated as ROM to workaround PS2 DECI-DMA bug but this
+         meant you couldn't write to it. Now it is read-write.
+
+        BPH - Added user configurability options (Pane colouring text and window colours,Fonts,DMA Errors,Dynamic Accelerator Keys)
+        All configuration options are stored in "config.ini" allows settings to be retained across projects (the only exception,
+        is DMA errors, which is stored in DEBUGPS2.PS2, so they are stored on a per project basis)
+        Also source code syntax colouring.
+
+        ADB - added "goto line" to source pane
+         added default tabs (based on file extension). Preserved in [deftabs] section of .PS2 file
+         added individual file-pane specific tabs, preserved to config with data for each pane.
+
+        ADB - starting debugger and exiting without loading an ELF no longer clears "last ELF" in config
+        ADB - added horizontal scroll bar to source pane
+        ADB - looked at disasm vs source wheelmouse inconsistencies and concluded that the Intellimouse
+         driver is buggy - it sends some windows scroll messages and others WM_MOUSEWHEEL messages instead
+         so folks with Win2k or Win98 with built-in mousewheel support should not use intellimouse software
+        ADB - Steve, I moved the compiled help into the same directory as the debugger to make updates easier
+        ADB - Added EUC -> SJIS translation and auto-detection (based on comment in code) and EUC context menu item
+        ADB - made the regpane "changes in red" persist even if pane redrawn
+        ADB - fixed the above regpane changes so it now works for floats too
+        ADB - fixed GIF disassembly of MIPTBP in reglists
+        ADB - added 64 and 128 bit display support to memory pane
+... through to...
+
+1.50.00 Assorted minor updates to new UI in response to developer feedback.
+1.50.01 RGO fixed watch pane so user keys cannot expand an already expanded watch
+
+1.50.02 RGO Accelerators added and SPC keystrokes sorted out.
+1.50.02 RGO Hitting enter in the watch pane no longer brings up dialog.
+1.50.02 RGO Foreground colours for each unit are now seperate.
+1.50.02 RGO Line numbers and "No Source ..." text are now in foreground colour.
+
+1.50.03 BPH Tooltips for toolbar buttons now show the accelerator keystroke in the text.
+1.50.03 ADB GIF packet disasm no longer terminates on EOP. Continues procesing GIF data instead.
+1.50.03 ADB Rebooting IOP no longer breaks IOP module list or stops profiling
+
+1.50.04 RGO Watch expansion bug fixed
+1.50.04 RGO Watch value changing caused a crash - FIXED
+1.50.04 RGO String values in watches being cut short - FIXED
+1.50.04 RGO Cursor style added to the PS2DBG.INI 0 for SN - 1 FOR VS
+
+1.50.05 ADB Changing display depth in DMA disasm now preserves current location in DMA chain
+1.50.05+ADB fixed the bug where...run to bp, disable bp, reload-elf, bp is no longer really disabled
+
+1.50.06 RGO Debugger hanging every now and then - FIXED
+1.50.06 RGO Added Spin through element 0 of unsized arrays using - and + (on the main keyboard not he numeric pad), configurable of course.
+
+1.50.07 RGO return types in callstack / breakpoint panes reported incorrectly - FIXED
+1.50.	ADB fixed charmap to avoid checking 2nd byte of multibyte characters for control codes
+			(this should fix the reported problem with Japnese characters being broken in some cases)
+		ADB told DMA pane not to disassemble initial DMA transfer if pane start set with "goto address"

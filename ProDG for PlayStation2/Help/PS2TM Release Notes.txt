@@ -1,0 +1,170 @@
+2.28.14.0
+Added ProView TTY Support
+
+2.28.13.0
+Fixed ProView communication reliability problems.
+
+2.28.12.0
+Fixed UDP broadcasting for NDK Analyzer.
+
+2.28.11.0
+Default timeout for reset for DECI2 PS2 targets increased to 8 seconds to fix problems with resets taking longer with latest Sony Libraries.
+
+2.28.9.0-2.28.10.0
+Updates and Fixes to ProView, (occasional hang on download). ProView NOW requires ps21394.sys V1.0.2.0 and ps21394.dll v1.0.4.0 to function. Target software should also be updated to latest.
+
+2.28.8.0
+Fixed kernel flash bug.
+
+2.28.7.0
+Fixed bug causing crash in 2.28.6.0 when no ps21394.dll was present.
+Added dependency version checking functionality for ProView.
+
+2.28.6.0
+Changed FireWire initialisation and added extra diagnostic capability.
+
+2.28.5.0
+Reset on FireWire Target timing out - fixed.
+Failed to load ps21394.dll - added extra diagnostics to log file to determine reason.
+Own unique id for FireWire target connect not being passed across properly - fixed.
+
+2.28.4.0
+Reset before download and set fileserver root not working for FireWire Targets - Fixed.
+
+2.28.3.0 - 2.28.3.1
+Fixes to various functions in FireWire module.
+
+2.28	01/12/00
+Added support for NDK Analyzer 1.0.1.0
+
+2.27E	14/11/00
+Fixed problem with boot parameter not being passed on properly to PS2 Targets on Reset.
+Fixed porblem with Flash Kernel output not being shown.
+
+2.27c,D	06/11/00
+Add DeRegisterProtocolHandler support for DECI2 custom protocol handling via the SDK.
+Fixed minor bug with memory transfers via SDK.
+
+2.27B	26/10/00
+Changed method of registering custom protocols when target is already connected.
+
+2.27A	25/10/00
+Updated custom protocol handling to allow connections on the fly.
+
+2.27	29/9/00
+Release version for ProDG 1.2
+
+2.26j	26/09/00
+Fixed problem with printing details of failed commands in TTY where weird chars would appear.
+
+2.26h,i	08/09/00
+Add support for VU features in Debugger.
+
+2.26g	03/08/00
+BUGFIX - Fixed problem where Target Manager sometimes crashes when getting status of target.
+
+2.26f   27/07/00
+Added configurable max memory transfer sizes
+
+2.26e	25/07/00
+Added user configurable timeout option.
+
+2.26d	24/07/00
+BUGFIX - TM sometimes displays "Failed to send packet" during transfers. TM now retries operation during timeout period.
+BUGFIX - "Reset and Reload" from ProDG Debugger sometimes fails to load ELF correctly. Delayed reset added to Target Manager to allow PS2 to fully re-initialise before download.
+BUGFIX - TM licensing now detects multiple networks cards.
+BUGFIX - TM crashes if reply from PS2 received just after timeout period. This is now fixed.
+TTY Updated - Clear now resets position and data count and scroll bar is proportional to amount of text. Keyboard I/F added for navigation.
+BUGFIX - TM incorrectly located SUL file when launched from different directory.
+
+2.26a	06/07/00
+Fixed handle inheritance problem when launched by ps2run.
+
+2.26	28/06/00
+Version for V1.1 Release
+
+2.25g	28/06/00
+Modified IOP_LIST_MODULES failures so they are reported silently in Target Manager TTY stream.
+
+2.25f	19/06/00
+Bug fix with memset/regset autoupdate not working correctly with debugger.
+
+2.25e	16/06/00
+Modified Target Manager to send notifications to attached clients whenever another app modifies memory/registers.
+
+2.25d	16/06/00
+Target Manager IOP module list only works when IOP is running - so now only update list in response to
+internal connect, internal reset and Refresh (F5) - don't react to external connect/reset from debugger.
+
+2.25c	15/06/00
+Fixes to IOP Module List to refresh after a reset properly.
+Fixes to display updates to eliminate flicker during file transfer operations.
+
+2.25b	13/06/00	
+Modified Nagging so that you can still use ps2run etc. to launch TM without these apps. failing.
+
+2.25a	12/06/00
+fixed bug causing flashing to fail if ELF had been downloaded immediately prior to flashing.
+
+2.25 	09/06/00
+IOP Support Added. 
+'IOP Modules' node in tree view added allowing listing of currently loaded modules for connected target - this gives equivalent of dsilist - (Use right-click context menu or F5 to update). 
+Load & Run IRX module dialog added for downloading (and running) IOP modules.
+Kernel Flashing updated - now can update kernels on devtools *FROM ANY* rom ver. *TO ANY* rom ver (romflash loader (rfld.elf) no longer required). Crisis recovery option added to recover from corrupted flash images.
+'NO STOMP' added for dsedb/dsidb users - Target Manager will no longer override these debug sessions.
+'Force Disconnect' facility added to forcibly remove all connections to a target... use with care :-)
+Steve's Split Pane Container replaces old splitter system so now split position is persisted between sessions.
+Keyboard shortcut clash fixed in Target menu - short cut for Load & Run ElF is now 'E'.
+Get Connect Status (Press F5 in Target Summary View) - displays connection status for all listed targets.
+Target Summary sorted by either name or ip address (click appropriate column) and persisted between sessions.
+Double click on target in Target summary view to connect/disconnect
+Double click on stream in TTY Summmary view to switch to desired stream output
+List view column widths persisted between sessions.
+Change TTY Font added.
+Copy/paste functionality for TTY windows.
+
+2.24  	26/04/00
+Target Manager was having problems connecting to targets via IP Address on DHCP networks, or where an unavailable DNS server was specified in the Windows network settings. This is no longer a problem.
+
+2.23a 	07/04/00
+Fixed bug that stopped flashing working with images with embedded spaces, e.g. "c:\prodg for ps2\t10000-0307.bin" is now ok.
+
+2.23	07/04/00
+Kernel Flashing Utility from Win32 Added - New Target menu command, "Flash Kernel" added which allows devtool kernel updates from Windows to be carried out. 
+TTY window no longer chops output at bottom. Added support for backspace chars in TTY stream.
+
+2.22  	30/3/00
+Tree View node contents now persisted between sessions (e.g. TTY text still accessible between connect sessions).
+Target Properties dialog added to allow editing of all target properties.
+Command line parameters can now be specified when downloading an ELF file via the Load & Run ELF File dialog.
+Keyboard shortcuts added as follows:- (C)onnect, (D)isconnect, (R)eset, Insert = Add target, Delete = Delete target, TAB/SHIFT+TAB = Switch between left/right view window.
+Delete target confirmation dialog added.
+
+2.21e 	16/3/00
+Command line options added as follows to allow almost complete control of target manager from command line. See DOCS for details on how to use or type "ps2tm -?" for help. 
+Boot parameters are now properties of each target and are stored along side other parameters in the ini file (default to -1).
+
+2.2 	15/2/00
+* Browse for folder dialogs always default to root regardless of current settings - FIXED - now default to 
+current settings for that target.
+* The [X] button in the caption bar and the "Close" option in both "File" and system tray menus NOW CAUSE THE TARGET MANAGER TO EXIT . The app can still be hidden by either clicking the minimize button or choosing the "Hide" menu option in the system tray menu.
+* The main window position and state is now persisted to the ps2tm.ini file. To have the app startup as MINIMIZED/HIDDEN, first hide it (by clicking the minimise button or choosing "Hide" from the system tray menu) and then exit the app. When restarted the app will start in the hidden state.
+* Fixed bug which causes PS2TM to not always locate the correct ini file (by default it should use the ini file located in the same directory as ps2tm.exe).
+
+2.1 	2/2/00
+Fixed problem where deleted pointer was causing PS2TM.EXE to hang during certain fileserve operations.
+Splitter is now positioned in absolute terms, not relative.
+Fixed splitter update problem where garbage sometimes left on screen.
+Splitter cannot get 'lost' when dragging to far right of window.
+Update problems for Current Workdir and Home Dir FIXED.
+Tray Icon is now rebuilt after explorer crashes and restarts.
+Problem where PS2TM would not switch to correct view after a disconnect ( and only a shutdown or reconnect would correct it) has been fixed.
+Option to turn off Exit dialog added.
+TTY Output streams now show Red icon when new TTY data has arrived.
+
+2.0 (Beta) 29/01/00
+Initial release (use V1.18 of debugger)
+New replacement for PS2Control V1.3, enhanced UI with explorer-style split panes. 
+TTY Output has been split into streams with a separate buffer for each and a TTY Summary view.
+Fileserving Information has been added to show files open and bytes read/written.
+Targets are now stored in ini file to allow easy moving (PS2TM.INI in same dir as PS2TM.EXE).
