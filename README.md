@@ -10,7 +10,8 @@ The files included in this repo are:
   - It doesn't seem to contain anything too important, but it is kept for completeness sake.
 - `usr`: The actual toolchain.
   - The compiler driver is located at `./usr/local/sce/ee/gcc/bin/ee-gcc295.exe`.
-  - The backend compiler tools are located at `./usr/local/sce/ee/gcc/lib/gcc-lib/ee/2.95.2/`
+  - The backend tools are located at  `./usr/local/sce/ee/gcc/lib/gcc-lib/ee/2.95.2/`.
+  - The binutils tools are located at `./usr/local/sce/ee/gcc/ee/bin`.
 
 ## Installer info
 
