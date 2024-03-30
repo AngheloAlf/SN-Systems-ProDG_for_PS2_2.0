@@ -49,3 +49,7 @@ Regards,
 SN Support Team
 ```
 
+## Other toolchains repos
+
+- [PS2 toolchain: GCC 2.95.2 (SN BUILD v2.73a)](https://github.com/AngheloAlf/SN-Systems-ProDG_for_PS2_2.0)
+- [PS2 toolchain: GCC 2.95.3 (SN BUILD v1.36)](https://github.com/AngheloAlf/SN-Systems-ProDG_for_PS2_3.01)
